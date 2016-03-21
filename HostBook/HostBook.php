@@ -1,4 +1,5 @@
 <?php
+// Sesja Start
 session_start();
 session_regenerate_id( );
 if(isset($_SESSION['login'])==false)
@@ -53,15 +54,17 @@ left: 69;
   <div id="decoration">		<div  id="image"></div>		</div>
 
 	<?php
+	//łączenie
 	require('connect.php');
 	$sql= new mysqli($host,$user,$pass,$base);
 	$rezultat = $sql->query("SELECT * FROM file WHERE id_user='{$_SESSION['id_user']}'");
-
+	//podawanie nazyw i liczby zdjec do wyswietlenia
 	$ile=$rezultat->num_rows;
 	echo '<input type="hidden" id="HMI" value="'.$ile.'" >';
 	echo '<input type="hidden" id="ID" value="'.$_SESSION['id_user'].'" >';
 	for($i=0;$i<$ile;$i++)
 	{
+		//Pobieranie rekordów
 		$anwers=$rezultat->fetch_assoc();
 		$tab[$i]=$anwers['file_name'];
 		echo '<input type="hidden" id="'.$i.'" value="'.$tab[$i].'" >';
@@ -69,17 +72,21 @@ left: 69;
 
 	?>
 	<script src="jquery.js"></script>
+
 	<script type="text/javascript">
+	//Sleider
 		 var HMI = document.getElementById('HMI').value;
 		 var ID = document.getElementById('ID').value;
 		 if(HMI<2)
 		 {
+		 	//Wyswietlanie gdy jest 1 zdjecie
 		 	var Img1 = document.getElementById('0').value;
 		 	document.getElementById('image').innerHTML='<img class="image_class" src="Upload/'+ID+'/'+Img1+'" >'
 
 		 }
 		 else
 		 {
+		 	//Wyswietlanie gdy są wiecej niż 1 zdjecie
 		 var rand=Math.floor((Math.random())* HMI);
 
 		 function schowaj()

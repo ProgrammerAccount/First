@@ -86,6 +86,7 @@ echo 'Nazwa Pliku : '.$nazwa ;
 echo '<form method="POST" action="delete.php" onsubmit="return confirm'."('Czy jestes pewien że chcesz usunąć zdjecie?')".'">';
 
 echo '<input type="hidden" name="plik" value="'.$nazwa.'" >';
+echo '<input type="hidden" name="id" value="'.$odp2['id'].'" >';
 echo '<input type="submit" value="Usuń">';
 echo '</form>';
 echo "</div>";

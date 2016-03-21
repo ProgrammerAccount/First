@@ -1,18 +1,17 @@
 <?php
 session_start();
 session_regenerate_id( );
-echo '<script>alert("Hello! I am an alert box!!")</script>';
 $name=$_POST['plik'];
+$id=$_POST['id'];
 require("connect.php");
 $connect= new mysqli($host,$user,$pass,$base);
 if($connect->connect_error)
 {
 echo "Error".$connect->connect_errno();
-
 }
 else
 {
-$connect->query("DELETE FROM file WHERE file_name='$name'");
+$connect->query("DELETE FROM file WHERE file_name='$name' AND id='$id'");
 @unlink("Upload/".$_SESSION['id_user']."/".$name);
 echo "Upload/".$_SESSION['id_user']."/".$name;
 $connect->close();
