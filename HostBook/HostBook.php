@@ -13,7 +13,10 @@ header("Location:index.php");
 <head>
 <link href='https://fonts.googleapis.com/css?family=Lato:400,700italic' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-<style> 
+	<link href="css/fontello.css" rel="stylesheet" type="text/css">
+
+
+<style>
 #image
 {
 	float: left;
@@ -26,23 +29,69 @@ height: 400px;
 width:600px;
 
 }
-.image_class
-{
-left: 69;
-}
+
 .image_class:hover
 {
 	opacity:initial;
 }
+@media(min-width: 300px)and (max-width: 400px)
+{
+	#image
+	{
+		width:280px;
+		height:200px;
+		border-width:8px;
+	}
+}
+@media(min-width: 400px)and (max-width: 550px)
+{
+	#image
+	{
+		width:350px;
+		height:250px;
+		border-width:8px;
+	}
+	.image_class
+{
+	height: 250px;
+	width: 350px;
+	margin-left:auto;
+	margin-right:auto;
+}
+}
+@media(min-width: 550px)and (max-width: 1000px)
+{
+	.image_class
+{
+	height: 350px;
+	width: 450px;
 
+}
+	#image
+	{
+		width:603px;
+		height:403px;
+		border-width:8px;
+	}
+}
 </style>
 	<title>HostBook</title>
 	<meta charset="utf-8"/>
 	<link rel="stylesheet" href="style.css">
+	<link href='https://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </head>
 <body>
+
 <div style="text-align: center;"><h1>Witaj Na Strone HostBook udostępnij swoje pliki i pokaż je znajomym</h1></div>
-<div style="text-align: center; font-family: 'Lobster', cursive; font-size: 30px;" >"Don't say just show"</div> 
+<div style="text-align: center; font-family: 'Lobster', cursive; font-size: 30px;" >"Don't say just show"</div>
+<div id="links"> Rozwiń menu <i class="demo-icon icon-down-open"></i> </div>
+<ul>
+		<li><a href="logout.php"> Wyloguj się </a></li>
+		<li><a href="manager.php"> Menager</a></li>
+		<li><a href="przegladarka.php">Przeglonadrka </a></li>
+		<li><a href="uploader.php"> Uploader</a></li>
+		<li><a href="HostBook.php">Home</a></li>
+</ul>
 <div id="linki">
 <a href="logout.php"><div class="linki" style="word-spacing: 2px; border-left: dotted #000088 2px;">Wyloguj  się</div> </a>
 <a href="manager.php"><div class="linki" style="word-spacing: 2px;"> Manager Files</div></a>
@@ -60,6 +109,9 @@ left: 69;
 	$rezultat = $sql->query("SELECT * FROM file WHERE id_user='{$_SESSION['id_user']}'");
 	//podawanie nazyw i liczby zdjec do wyswietlenia
 	$ile=$rezultat->num_rows;
+
+
+
 	echo '<input type="hidden" id="HMI" value="'.$ile.'" >';
 	echo '<input type="hidden" id="ID" value="'.$_SESSION['id_user'].'" >';
 	for($i=0;$i<$ile;$i++)
@@ -77,13 +129,18 @@ left: 69;
 	//Sleider
 		 var HMI = document.getElementById('HMI').value;
 		 var ID = document.getElementById('ID').value;
-		 if(HMI<2)
+		 if(HMI<1)
+		 {
+		 document.getElementById('image').innerHTML='<img class="image_class" src="img/ImageStart.jpg" >'
+		 }
+		 else if(HMI<2)
 		 {
 		 	//Wyswietlanie gdy jest 1 zdjecie
 		 	var Img1 = document.getElementById('0').value;
 		 	document.getElementById('image').innerHTML='<img class="image_class" src="Upload/'+ID+'/'+Img1+'" >'
 
 		 }
+
 		 else
 		 {
 		 	//Wyswietlanie gdy są wiecej niż 1 zdjecie
@@ -102,11 +159,11 @@ left: 69;
 		document.getElementById('image').innerHTML='<img class="image_class" src="Upload/'+ID+'/'+Img1+'"">'
 		$('#image').fadeIn(500);
 
-	
-	
+
+
 		 rand++;
 		 if(rand>=HMI)
-		 	{ 
+		 	{
 rand=0;
 		 	}
 setTimeout("slider()", 5000);

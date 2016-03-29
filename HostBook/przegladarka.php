@@ -57,8 +57,8 @@ else
 
 <div style="text-align: center;"><h1>Witaj Na Strone HostBook udostępnij swoje pliki i pokaż je znajomym</h1></div>
 <div style="text-align: center; font-family: 'Lobster', cursive; font-size: 30px;" >"Don't say just show"</div> 
-
-<div id="linki">
+<div id='xdd'></div>
+<div id="linki" >
 <a href="logout.php"><div class="linki" style="word-spacing: 2px; border-left: dotted #000088 2px;">Wyloguj  się</div> </a>
 <a href="manager.php"><div class="linki" style="word-spacing: 2px;"> Manager Files</div></a>
 <a href="przegladarka.php"><div class="linki">Przegladarka </div></a>
@@ -66,7 +66,7 @@ else
 <a href="HostBook.php"><div class="linki"> Home</div></a>
 <div style="clear: both;"></div>
 	</div>
-	<div style="text-align: center;">kliknij na zdjęcie by udostępnić</div>
+	<div onload="link()" style="text-align: center;">kliknij na zdjęcie by udostępnić</div>
 	<br/><br/>
 	<script src="jquery.js"></script>
 
@@ -95,9 +95,9 @@ if(isset($_SESSION['bad']))
 			$id=$odp['id'];
 			$name=$odp['file_name'];
 			$ifo=pathinfo($name);
-			@$info=$ifo['extension'];
+			@$inf=$ifo['extension'];
 			
-			if(($info=="jpeg")||($info=="jpg")||($info=="png"))
+			if(($inf=="png")||($inf=="jpg")||($inf=="jpeg")||($inf=="gif"))
 			{
 					if(isset($_GET['user'])==false)
 					{
@@ -120,12 +120,14 @@ if(isset($_SESSION['bad']))
 
 
 <script type="text/javascript">
+
+
 $(document).ready(function(){
 	var nav= $('#linki').offset().top;
 	var stickyN = function()
 	{
 var scroll=$(window).scrollTop();
-if(scroll>nav)
+if((scroll>nav)&&(window.innerWidth > 600))
 {
 $('#linki').addClass('sticky');
 
